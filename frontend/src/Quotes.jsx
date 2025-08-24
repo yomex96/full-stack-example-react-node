@@ -2,47 +2,44 @@ import React, { useState } from "react";
 import axios from "axios";
 
 function Quotes() {
-    const [text, setText] = useState("");
-    const [author, setAuthor] = useState("");
-    const [loading, setLoading] = useState(false);
+  const [text, setText] = useState("");
+  const [author, setAuthor] = useState("");
+  const [loading, setLoading] = useState(false);
 
-    const getQuote = async () => {
+  const getQuote = async () => {
     setLoading(true);
     try {
-        const response = await axios.get("http://localhost:5000/");
-        setText(response.data.text);
-        setAuthor(response.data.author);
+      const response = await axios.get("http://localhost:5000/");
+      setText(response.data.text);
+      setAuthor(response.data.author);
     } catch (err) {
-        console.error("Error fetching quote:", err);
-        setText("Oops! Could not fetch a quote 😢");
-        setAuthor("");
+      console.error("Error fetching quote:", err);
+      setText("Oops! Could not fetch a quote 😢");
+      setAuthor("");
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
-};
+  };
 
+  return (
+    <div>
+      <button onClick={getQuote} disabled={loading}>
+        {loading ? "Fetching..." : "Generate Quote"}
+      </button>
 
-    return (
-        <div>
-            <button onClick={getQuote} disabled={loading}>
-                {loading ? "Fetching..." : "Generate Quote"}
-            </button>
+      {loading && <p>✨ Loading new quote...</p>}
 
-            {loading && <p>✨ Loading new quote...</p>}
-
-            {!loading && text && (
-                <>
-                    <h1>{text}</h1>
-                    {author && <h3>- {author}</h3>}
-                </>
-            )}
-        </div>
-    );
+      {!loading && text && (
+        <>
+          <h1 data-testid="quote-text">{text}</h1>
+          {author && <h3 data-testid="quote-author">- {author}</h3>}
+        </>
+      )}
+    </div>
+  );
 }
 
 export default Quotes;
-
-
 
 // import React, {useState} from "react";
 // import axios from "axios";
