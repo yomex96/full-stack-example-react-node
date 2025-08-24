@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./Quotes.css";
+
 
 function Quotes() {
   const [text, setText] = useState("");
@@ -21,9 +23,10 @@ function Quotes() {
     }
   };
 
+
   return (
     <div>
-      <button onClick={getQuote} disabled={loading}>
+      <button className="button" onClick={getQuote} disabled={loading}>
         {loading ? "Fetching..." : "Generate Quote"}
       </button>
 

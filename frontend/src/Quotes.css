@@ -1,0 +1,13 @@
+.button {
+  background-color: lightblue;
+  color: rgb(30, 178, 59);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
